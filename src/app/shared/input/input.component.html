@@ -1,0 +1,6 @@
+<div class="form-group" [class.has-error]="!input.valid" [class.has-success]="input.valid" >
+  <label class="control-label sr-only" for="inputSuccess"><i class="fa fa-check"></i> {{label}}</label>
+  <ng-content></ng-content>
+  <span *ngIf="!input.valid" class="help-block"><i class="fa fa-remove"></i> {{errorMessage}}</span>
+  <span *ngIf="input.valid" class="help-block"><i class="fa fa-remove"></i> Ok</span>
+</div>

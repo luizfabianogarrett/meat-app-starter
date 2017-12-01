@@ -21,6 +21,11 @@ import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.compo
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { OrderComponent } from './order/order.component';
 import { InputComponent } from './shared/input/input.component';
+import { AuthGuardService } from 'app/shared/auth-guard.service';
+import { CookieService } from 'ng2-cookies';
+import { RadioComponent } from './shared/radio/radio.component';
+import { OrderItemsComponent } from './order/order-items/order-items.component';
+import { OrderService } from 'app/order/order.service';
 
 
 @NgModule({
@@ -37,7 +42,9 @@ import { InputComponent } from './shared/input/input.component';
     MenuItemComponent,
     ReviewsComponent,
     OrderComponent,
-    InputComponent
+    InputComponent,
+    RadioComponent,
+    OrderItemsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,7 @@ import { InputComponent } from './shared/input/input.component';
     RouterModule.forRoot(ROUTES),
 
   ],
-  providers: [RestaurantsService, ShoppingCartService, {provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [CookieService, AuthGuardService, RestaurantsService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

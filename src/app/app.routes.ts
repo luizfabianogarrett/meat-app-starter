@@ -7,6 +7,7 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
 import { OrderComponent } from './order/order.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
+import { AuthGuardService } from "app/shared/auth-guard.service";
 
 export const ROUTES: Routes = [
     { path : '', component: HomeComponent },
@@ -19,5 +20,9 @@ export const ROUTES: Routes = [
         ]
     },
     { path: 'order', component: OrderComponent},
-    { path : 'about', component: AboutComponent },
+    { 
+        path : 'about', 
+        component: AboutComponent,
+        canActivate: [AuthGuardService],  
+    },
 ]

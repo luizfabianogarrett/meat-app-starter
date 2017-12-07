@@ -1,7 +1,7 @@
 import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-cart.service';
 import { RestaurantsService } from './restaurants/restaurants.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +26,11 @@ import { CookieService } from 'ng2-cookies';
 import { RadioComponent } from './shared/radio/radio.component';
 import { OrderItemsComponent } from './order/order-items/order-items.component';
 import { OrderService } from 'app/order/order.service';
+import { DeliveryCostsComponent } from './order/delivery-costs/delivery-costs.component';
 
+export function initConfig(config: RestaurantsService) {
+   return () => config.init();
+}
 
 @NgModule({
   declarations: [
@@ -44,7 +48,8 @@ import { OrderService } from 'app/order/order.service';
     OrderComponent,
     InputComponent,
     RadioComponent,
-    OrderItemsComponent
+    OrderItemsComponent,
+    DeliveryCostsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,18 @@ import { OrderService } from 'app/order/order.service';
     RouterModule.forRoot(ROUTES),
 
   ],
-  providers: [CookieService, AuthGuardService, RestaurantsService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [
+    RestaurantsService, 
+    CookieService, 
+    AuthGuardService, 
+    ShoppingCartService, 
+    OrderService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: APP_INITIALIZER, useFactory: initConfig, deps: [RestaurantsService], multi: true }
+  ],
   bootstrap: [AppComponent]
 })
+
+
+
 export class AppModule { }

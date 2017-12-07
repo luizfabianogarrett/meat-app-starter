@@ -9,10 +9,10 @@ import { CartItem } from 'app/restaurant-detail/shopping-cart/cart-item.model';
 })
 export class OrderComponent implements OnInit {
 
-  paymentOptions: RadioOption[] = [ 
-    { label: "Dinheiro", value: "DIN"}, 
-    { label: "Débito", value: "DEB"},
-    { label: "Crédito", value: "CRE"},  
+  paymentOptions: RadioOption[] = [
+    { label: "Dinheiro", value: "DIN" },
+    { label: "Débito", value: "DEB" },
+    { label: "Crédito", value: "CRE" },
   ]
 
   constructor(private orderService: OrderService) { }
@@ -21,12 +21,15 @@ export class OrderComponent implements OnInit {
     return this.orderService.cartItems()
   }
 
-  increment(item: CartItem)
-  {
+  increment(item: CartItem) {
     this.orderService.increment(item)
   }
 
   ngOnInit() {
+  }
+
+  check(order: any) {
+    console.log(order)
   }
 
 }
